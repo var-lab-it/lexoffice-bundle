@@ -1,8 +1,8 @@
-# Lexoffice-Bundle for Symfony
+# lexoffice-Bundle for Symfony
 
 ## Introduction
 
-This bundle integrates the [Lexoffice public API](https://developers.lexoffice.io/docs) into Symfony, utilizing
+This bundle integrates the [lexoffice public API](https://developers.lexoffice.io/docs) into Symfony, utilizing
 Symfony's serializer to convert API responses into objects. Compatible with Symfony 6.4.
 
 ## Installation
