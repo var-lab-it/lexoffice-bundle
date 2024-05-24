@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        check_command: ['lint:composer', 'lint:php', 'phpstan', 'tests:unit', 'tests:integration']
+        check_command: ['lint:composer', 'lint:php', 'phpstan', 'tests:integration']
         php_version: ['8.1', '8.2', '8.3']
     steps:
       - name: Checkout
@@ -36,3 +36,15 @@ jobs:
 
       - name: Run ${{ matrix.check_command }}
         run: composer run ${{ matrix.check_command }}
+
+      - name: Run unittests
+        run: composer run tests:unit
+
+      - uses: codecov/codecov-action@v4
+        with:
+          fail_ci_if_error: true
+          files: ./reports/junit-unittests.xml
+          flags: unittests
+          name: codecov-lexoffice-bundle
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
