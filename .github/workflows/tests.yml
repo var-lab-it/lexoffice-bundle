@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         check_command: ['lint:composer', 'lint:php', 'phpstan', 'tests:unit', 'tests:integration']
-        php_version: ['8.1', '8.2']
+        php_version: ['8.1', '8.2', '8.3']
     steps:
       - name: Checkout
         uses: actions/checkout@v3
