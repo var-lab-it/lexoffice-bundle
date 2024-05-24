@@ -1,0 +1,22 @@
+{
+    "id": "lexoffice-id",
+    "roles": [],
+    "company": {
+        "name": "Test company AG",
+        "taxNumber": "123\/123\/1234",
+        "contactPersons": [
+            {
+                "firstName": "Max",
+                "lastName": "Mustermann"
+            }
+        ]
+    },
+    "addresses": {
+        "billing": [
+            {
+                "city": "N\u00fcrnberg",
+                "countryCode": "DE"
+            }
+        ]
+    }
+}

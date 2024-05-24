@@ -1,0 +1,93 @@
+variables:
+  DOCKER_DRIVER: overlay2
+  JOB_IMAGE: git.var-lab.com:5050/dev-tools/glubuntu-php:latest-php-8.1
+  GIT_STRATEGY: clone
+
+stages:
+  - pre
+  - test
+  - build
+  - deploy
+
+#check_commits:
+#  stage: pre
+#  rules:
+#    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+#    - if: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH)
+#  script:
+#    - >
+#      if echo "$CI_COMMIT_MESSAGE" | egrep '(^(#)[0-9]+\s)' >/dev/null ; then
+#        echo "Commit message is valid."
+#      else
+#        echo "Commit message is invalid. The first line has to contain a ticket/issue id like #123."
+#        exit 1
+#      fi
+#    - >
+#      if [[ "$CI_MERGE_REQUEST_TITLE" ]]; then
+#        Replacement=""
+#        CLEAR_TITLE="${CI_MERGE_REQUEST_TITLE/Draft: /${Replacement}}"
+#        if echo "$CLEAR_TITLE" | egrep '(^(#)[0-9]+\s)' >/dev/null ; then
+#          echo "Merge request title is valid."
+#        else
+#          echo "Merge request title is invalid. It has to contain a ticket/issue id like #123 or Draft: #123."
+#          exit 1
+#        fi
+#      fi
+
+tests_unit:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH)
+  image:
+    name: $JOB_IMAGE
+  stage:
+    test
+#  services:
+#    - name: mysql:8.0.28
+#      alias: database
+#  variables:
+#    MYSQL_DATABASE_NAME: symfony
+#    MYSQL_ROOT_PASSWORD: root
+#    MYSQL_USER: symfony
+#    MYSQL_PASSWORD: symfony
+#    MYSQL_DATABASE: symfony
+  script:
+#    - mysql -h database -u root -proot <<< "SET GLOBAL sql_mode = '';"
+    - composer install
+    - composer run tests:unit
+
+tests_integration:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH)
+  image:
+    name: $JOB_IMAGE
+  stage:
+    test
+  #  services:
+  #    - name: mysql:8.0.28
+  #      alias: database
+  #  variables:
+  #    MYSQL_DATABASE_NAME: symfony
+  #    MYSQL_ROOT_PASSWORD: root
+  #    MYSQL_USER: symfony
+  #    MYSQL_PASSWORD: symfony
+  #    MYSQL_DATABASE: symfony
+  script:
+    #    - mysql -h database -u root -proot <<< "SET GLOBAL sql_mode = '';"
+    - composer install
+    - composer run tests:integration
+
+checks:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: ($CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH)
+  image:
+    name: $JOB_IMAGE
+  stage:
+    test
+  script:
+    - composer install
+    - composer normalize --dry-run
+    - composer run lint:php
+    - composer run phpstan

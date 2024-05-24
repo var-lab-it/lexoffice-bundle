@@ -1,0 +1,90 @@
+{
+  "name": "var-lab/lexoffice-bundle",
+  "description": "A Symfony bundle to integrate the lexoffice api.",
+  "license": "proprietary",
+  "type": "symfony-bundle",
+  "version": "0.1.0",
+  "require": {
+    "php": "^8.1",
+    "ext-ctype": "*",
+    "ext-iconv": "*",
+    "ext-posix": "*",
+    "guzzlehttp/guzzle": "^7.8",
+    "symfony/config": "^6.2",
+    "symfony/dependency-injection": "^6.2",
+    "symfony/filesystem": "^6.4",
+    "symfony/http-client": "^6.4",
+    "symfony/serializer": "^6.4",
+    "symfony/validator": "^6.4",
+    "thecodingmachine/safe": "^2.1"
+  },
+  "require-dev": {
+    "ext-pcntl": "*",
+    "ergebnis/composer-normalize": "^2.15",
+    "jangregor/phpstan-prophecy": "^1.0",
+    "phpstan/extension-installer": "^1.1",
+    "phpstan/phpstan": "^1.4",
+    "phpstan/phpstan-deprecation-rules": "^1.0",
+    "phpstan/phpstan-phpunit": "^1.0",
+    "phpstan/phpstan-strict-rules": "^1.1",
+    "phpunit/php-code-coverage": "^9.2",
+    "phpunit/phpunit": "9.5.16",
+    "spatie/phpunit-snapshot-assertions": "^4.2",
+    "squizlabs/php_codesniffer": "*",
+    "symfony/browser-kit": "^6.2.0",
+    "symfony/framework-bundle": "^6.4",
+    "symfony/http-kernel": "^6.2",
+    "symfony/phpunit-bridge": "^6.2.0",
+    "symfony/stopwatch": "^6.2.0",
+    "symfony/var-exporter": "^6.2",
+    "thecodingmachine/phpstan-safe-rule": "^1.2",
+    "var-lab/coding-standard": "^1.0"
+  },
+  "conflict": {
+    "symfony/symfony": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "VarLabIT\\LexofficeBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\VarLabIT\\LexofficeBundle\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "ergebnis/composer-normalize": true,
+      "phpstan/extension-installer": true
+    }
+  },
+  "scripts": {
+    "all-checks": [
+      "@lint:composer",
+      "@lint:php",
+      "@phpstan",
+      "@tests:unit",
+      "@tests:integration"
+    ],
+    "lint:composer": "composer normalize --dry-run",
+    "lint:php": "phpcs -p --parallel=$(nproc) --standard=var-lab src tests --ignore=tests/coverage/* -s",
+    "lint:php:fix": "php -d error_reporting=24575 vendor/bin/phpcbf -q --parallel=$(nproc) --standard=var-lab src tests --ignore=tests/coverage/*",
+    "phpstan": "phpstan --no-progress",
+    "security-check": [
+      "local-php-security-checker"
+    ],
+    "tests": [
+      "@tests:unit",
+      "@tests:integration"
+    ],
+    "tests:integration": "XDEBUG_MODE=debug phpunit --testsuite Integration",
+    "tests:snapshots:update": [
+      "XDEBUG_MODE=coverage,debug phpunit --testsuite=Unit -d --update-snapshots",
+      "XDEBUG_MODE=coverage,debug phpunit --testsuite=Integration -d --update-snapshots"
+    ],
+    "tests:unit": "XDEBUG_MODE=coverage,debug phpunit --testsuite Unit --log-junit=reports/junit-unittests.xml --coverage-text --colors=never --coverage-html=tests/coverage"
+  }
+}

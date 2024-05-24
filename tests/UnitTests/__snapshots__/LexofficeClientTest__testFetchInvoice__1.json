@@ -1,0 +1,119 @@
+{
+    "id": "e9066f04-8cc7-4616-93f8-ac9ecc8479c8",
+    "organizationId": "aa93e8a8-2aa3-470b-b914-caad8a255dd8",
+    "createdDate": "2023-04-24T00:00:00.000+02:00",
+    "updatedDate": "2023-04-24T00:00:00.000+02:00",
+    "version": 0,
+    "language": {
+        "name": "DE",
+        "value": "de"
+    },
+    "archived": false,
+    "voucherStatus": "draft",
+    "voucherNumber": "RE1019",
+    "voucherDate": "2023-02-22T00:00:00.000+02:00",
+    "dueDate": "2023-04-24T00:00:00.000+02:00",
+    "address": {
+        "supplement": "Geb\u00e4ude 10",
+        "street": "Musterstra\u00dfe 42",
+        "zip": "79112",
+        "city": "Freiburg",
+        "countryCode": "DE"
+    },
+    "lineItems": [
+        {
+            "id": "97b98491-e953-4dc9-97a9-ae437a8052b4",
+            "type": "material",
+            "name": "Abus Kabelschloss Primo 590 ",
+            "description": "\u00b7 9,5 mm starkes, smoke-mattes Spiralkabel mit integrierter Halterl\u00f6sung zur Befestigung am Sattelklemmbolzen \u00b7 bew\u00e4hrter Qualit\u00e4ts-Schlie\u00dfzylinder mit praktischem Wendeschl\u00fcssel \u00b7 Kabel\u00d8: 9,5 mm, L\u00e4nge: 150 cm",
+            "quantity": 2,
+            "unitName": "St\u00fcck",
+            "unitPrice": {
+                "currency": "EUR",
+                "netAmount": 13.4,
+                "grossAmount": 15.95,
+                "taxRatePercentage": 19
+            },
+            "discountPercentage": 50,
+            "lineItemAmount": 13.4
+        },
+        {
+            "id": "dc4c805b-7df1-4310-a548-22be4499eb04",
+            "type": "service",
+            "name": "Aufw\u00e4ndige Montage",
+            "description": "Aufwand f\u00fcr arbeitsintensive Montaget\u00e4tigkeit",
+            "quantity": 1,
+            "unitName": "Stunde",
+            "unitPrice": {
+                "currency": "EUR",
+                "netAmount": 8.32,
+                "grossAmount": 8.9,
+                "taxRatePercentage": 7
+            },
+            "discountPercentage": 0,
+            "lineItemAmount": 8.32
+        },
+        {
+            "type": "custom",
+            "name": "Energieriegel Testpaket",
+            "quantity": 1,
+            "unitName": "St\u00fcck",
+            "unitPrice": {
+                "currency": "EUR",
+                "netAmount": 5,
+                "grossAmount": 5,
+                "taxRatePercentage": 0
+            },
+            "discountPercentage": 0,
+            "lineItemAmount": 5
+        }
+    ],
+    "totalPrice": {
+        "currency": "EUR",
+        "totalNetAmount": 26.72,
+        "totalGrossAmount": 29.85,
+        "totalTaxAmount": 3.13
+    },
+    "taxAmounts": [
+        {
+            "taxRatePercentage": 0,
+            "taxAmount": 0,
+            "netAmount": 5
+        },
+        {
+            "taxRatePercentage": 7,
+            "taxAmount": 0.58,
+            "netAmount": 8.32
+        },
+        {
+            "taxRatePercentage": 19,
+            "taxAmount": 2.55,
+            "netAmount": 13.4
+        }
+    ],
+    "taxConditions": {
+        "taxType": "net"
+    },
+    "paymentConditions": {
+        "paymentTermLabel": "10 Tage - 3 %, 30 Tage netto",
+        "paymentTermLabelTemplate": "{discountRange} Tage -{discount}, {paymentRange} Tage netto",
+        "paymentTermDuration": 30,
+        "paymentDiscountConditions": {
+            "discountPercentage": 3,
+            "discountRange": 10
+        }
+    },
+    "shippingConditions": {
+        "shippingDate": "2023-04-22T00:00:00.000+02:00",
+        "shippingType": "delivery"
+    },
+    "downPaymentDeductions": [],
+    "title": "Rechnung",
+    "introduction": "Ihre bestellten Positionen stellen wir Ihnen hiermit in Rechnung",
+    "remark": "Vielen Dank f\u00fcr Ihren Einkauf",
+    "files": [
+        {
+            "documentFileId": "75295db7-7e69-4630-befd-a7f4ddfdaa83"
+        }
+    ]
+}
