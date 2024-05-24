@@ -9,7 +9,7 @@ If you're keen to contribute, follow these steps:
 Before submitting a bug:
 
 - Review the project documentation.
-- Familiarize yourself with the Lexoffice public API documentation.
+- Familiarize yourself with the lexoffice public API documentation.
 - If you're sure it's a bug, use the official bug tracker and adhere to these guidelines:
 
 1. Use a clear title to describe the issue.
