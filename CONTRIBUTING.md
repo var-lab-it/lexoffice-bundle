@@ -1,7 +1,5 @@
 # Contributing
 
-To contribute, [create a free account](https://git.var-lab.com/users/sign_up) on this GitLab instance for bug report submissions.
-
 If you're keen to contribute, follow these steps:
 
 ## Reporting a Bug
@@ -18,6 +16,17 @@ Before submitting a bug:
 4. Furnish comprehensive details about your environment (OS, PHP version, Symfony version, enabled extensions, etc.).
 5. If an exception occurred, supply the stack trace. For HTML pages, provide the plain text version at the bottom of the page. Avoid screenshots for indexing purposes. Similarly, for terminal errors, avoid screenshots and opt for copy/pasting the contents. If the stack trace is extensive, consider enclosing it in a "Details" section.
 6. Optionally, attach a patch.
+
+## Use docker for local development
+
+This bundle contains a docker setup for local development.
+
+You can use `make` to run the docker container:
+
+```shell
+make up # Start the docker container
+make sh # Open the shell of the php container
+```
 
 ## Coding Standards
 
