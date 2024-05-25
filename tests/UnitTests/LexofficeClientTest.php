@@ -8,6 +8,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Spatie\Snapshots\MatchesSnapshots;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
@@ -15,8 +16,13 @@ use VarLabIT\LexofficeBundle\Entity\Address;
 use VarLabIT\LexofficeBundle\Entity\Company;
 use VarLabIT\LexofficeBundle\Entity\Contact;
 use VarLabIT\LexofficeBundle\Entity\Enum\AddressType;
+use VarLabIT\LexofficeBundle\Entity\Enum\Currency;
+use VarLabIT\LexofficeBundle\Entity\Enum\LineItemType;
 use VarLabIT\LexofficeBundle\Entity\Invoice;
+use VarLabIT\LexofficeBundle\Entity\LineItem;
 use VarLabIT\LexofficeBundle\Entity\Person;
+use VarLabIT\LexofficeBundle\Entity\UnitPrice;
+use VarLabIT\LexofficeBundle\Exception\ValidationException;
 use VarLabIT\LexofficeBundle\LexofficeClient;
 use VarLabIT\LexofficeBundle\Transformer\ContactTransformer;
 use VarLabIT\LexofficeBundle\Transformer\InvoiceTransformer;
@@ -36,6 +42,71 @@ class LexofficeClientTest extends TestCase
         $this->httpClientMock = $this->createMock(HttpClientInterface::class);
         $this->validatorMock  = $this->createMock(ValidatorInterface::class);
         $this->filesystemMock = $this->createMock(Filesystem::class);
+    }
+
+    public function testCreateInvoiceSucceeds(): void
+    {
+        $responseMock = $this->createMock(ResponseInterface::class);
+        $responseMock
+            ->method('getContent')
+            ->willReturn(json_encode([
+                'id' => 'lexoffice-id',
+            ]));
+
+        $this->httpClientMock
+            ->method('request')
+            ->willReturn($responseMock);
+
+        $invoice = new Invoice();
+        $invoice
+            ->setId('lexoffice-id')
+            ->setTitle('Invoice')
+            ->setAddress(
+                (new Address())
+                    ->setCity('Nürnberg')
+                    ->setCountryCode('DE'),
+            )
+            ->setRemark('Thank you!')
+            ->addLineItem(
+                (new LineItem())
+                    ->setId('lexoffice-id')
+                    ->setName('Software development')
+                    ->setQuantity(100)
+                    ->setType(LineItemType::SERVICE)
+                    ->setDescription('Creating a nice software.')
+                    ->setUnitPrice(
+                        (new UnitPrice())
+                            ->setCurrency(Currency::EUR)
+                            ->setTaxRatePercentage(19)
+                            ->setNetAmount(120)
+                            ->setGrossAmount(120 * 1.19),
+                    ),
+            );
+
+        $client = $this->getClient();
+
+        $result = $client->createInvoice($invoice);
+
+        $resultArray = InvoiceTransformer::getInstance()->transformFromObject($result);
+
+        self::assertMatchesJsonSnapshot($resultArray);
+    }
+
+    public function testCreateInvoiceValidationErrors(): void
+    {
+        $constraintsMock = $this->createMock(ConstraintViolationListInterface::class);
+        $constraintsMock
+            ->method('count')
+            ->willReturn(10);
+
+        $this->validatorMock
+            ->method('validate')
+            ->willReturn($constraintsMock);
+
+        $client = $this->getClient();
+
+        self::expectException(ValidationException::class);
+        $client->createInvoice(new Invoice());
     }
 
     public function testFetchInvoice(): void

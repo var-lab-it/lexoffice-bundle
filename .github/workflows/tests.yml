@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        check_command: ['lint:composer', 'lint:php', 'phpstan', 'tests:unit', 'tests:integration']
+        check_command: ['lint:composer', 'lint:php', 'phpstan', 'tests:unit:ci', 'tests:integration']
         php_version: ['8.1', '8.2', '8.3']
     steps:
       - name: Checkout

@@ -85,6 +85,7 @@
       "XDEBUG_MODE=coverage,debug phpunit --testsuite=Unit -d --update-snapshots",
       "XDEBUG_MODE=coverage,debug phpunit --testsuite=Integration -d --update-snapshots"
     ],
-    "tests:unit": "XDEBUG_MODE=coverage,debug phpunit --testsuite Unit --log-junit=reports/junit-unittests.xml --coverage-text --colors=never --coverage-html=tests/coverage"
+    "tests:unit": "XDEBUG_MODE=coverage,debug phpunit --testsuite Unit --log-junit=reports/junit-unittests.xml --coverage-html=tests/coverage",
+    "tests:unit:ci": "XDEBUG_MODE=coverage,debug phpunit --testsuite Unit --log-junit=reports/junit-unittests.xml --coverage-text --colors=never --coverage-html=tests/coverage"
   }
 }
