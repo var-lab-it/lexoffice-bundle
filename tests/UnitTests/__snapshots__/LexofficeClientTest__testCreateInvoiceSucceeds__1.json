@@ -1,0 +1,27 @@
+{
+    "id": "lexoffice-id",
+    "address": {
+        "city": "N\u00fcrnberg",
+        "countryCode": "DE"
+    },
+    "lineItems": [
+        {
+            "id": "lexoffice-id",
+            "type": "service",
+            "name": "Software development",
+            "description": "Creating a nice software.",
+            "quantity": 100,
+            "unitPrice": {
+                "currency": "EUR",
+                "netAmount": 120,
+                "grossAmount": 142.79999999999998,
+                "taxRatePercentage": 19
+            }
+        }
+    ],
+    "taxAmounts": [],
+    "downPaymentDeductions": [],
+    "title": "Invoice",
+    "remark": "Thank you!",
+    "files": []
+}
