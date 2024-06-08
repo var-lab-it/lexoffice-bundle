@@ -107,8 +107,6 @@ class LexofficeClient
 
     public function updateContact(Contact $contact): Contact
     {
-        $contact->setVersion($contact->getVersion() + 1);
-
         $errors = $this->validator->validate($contact);
 
         if (\count($errors) > 0) {
