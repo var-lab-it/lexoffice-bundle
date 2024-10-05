@@ -53,10 +53,7 @@ WORKDIR /srv/php
 
 # prevent the reinstallation of vendors at every changes in the source code
 COPY composer.json .
-# composer.lock symfony.lock ./
-
-# copy only specifically what we need
-COPY config config/
+COPY composer.lock ./
 COPY src src/
 
 RUN mkdir -p var/log
