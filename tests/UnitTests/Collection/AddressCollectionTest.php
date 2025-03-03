@@ -13,9 +13,9 @@ class AddressCollectionTest extends TestCase
     public function testConstructorWithValidAddresses(): void
     {
         $addresses = [
-            (new Address()),
-            (new Address()),
-            (new Address()),
+            new Address(),
+            new Address(),
+            new Address(),
         ];
 
         $collection = new AddressCollection($addresses);
@@ -26,9 +26,9 @@ class AddressCollectionTest extends TestCase
     public function testConstructorWithValidAndInvalidAddresses(): void
     {
         $addresses = [
-            (new Address()),
+            new Address(),
             new \stdClass(),
-            (new Address()),
+            new Address(),
         ];
 
         /** @phpstan-ignore-next-line */
