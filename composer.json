@@ -3,7 +3,7 @@
   "description": "A Symfony bundle to integrate the lexoffice api.",
   "license": "proprietary",
   "type": "symfony-bundle",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "require": {
     "php": ">=8.1",
     "ext-ctype": "*",
