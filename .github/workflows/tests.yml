@@ -31,6 +31,7 @@ jobs:
           path: '~/.cache/composer'
           key: "cache-composer-${{ hashFiles('**/app/composer.lock') }}"
           restore-keys: 'cache-composer-'
+
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
 
