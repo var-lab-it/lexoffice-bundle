@@ -38,7 +38,7 @@
     "symfony/stopwatch": ">=6.2.0",
     "symfony/var-exporter": ">=6.2",
     "thecodingmachine/phpstan-safe-rule": "^1.2",
-    "var-lab/coding-standard": "^1.0"
+    "var-lab/coding-standard": "^2.0"
   },
   "conflict": {
     "symfony/symfony": "*"
