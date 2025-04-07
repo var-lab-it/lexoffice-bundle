@@ -5,7 +5,7 @@
 # -------------
 # generic php base image
 # -------------
-FROM php:8.1-fpm-alpine AS base
+FROM php:8.4-fpm-alpine AS base
 
 RUN apk update
 RUN apk add --no-cache \
@@ -21,7 +21,7 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS linux-headers \
     && apk del .build-deps
 
 #RUN docker-php-ext-enable apcu
-COPY --from=composer:2.5.1 /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:2.8.7 /usr/bin/composer /usr/local/bin/composer
 
 VOLUME /var/run/php
 
@@ -116,7 +116,7 @@ FROM base AS php_dev
 WORKDIR /srv/php
 
 RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS linux-headers \
-    && pecl install xdebug-3.2.0 \
+    && pecl install xdebug-3.4.2 \
     && docker-php-ext-enable xdebug \
     && apk del .build-deps
 
