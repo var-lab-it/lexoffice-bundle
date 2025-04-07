@@ -12,4 +12,4 @@ ps:
 
 build:
 	@echo "Build docker container"
-	docker compose build -d
+	docker compose build
